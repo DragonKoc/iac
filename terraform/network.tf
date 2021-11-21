@@ -12,7 +12,7 @@ resource "aws_vpc" "itea-vpc" {
 
 resource "aws_subnet" "itea-subnet-public-1" {
   vpc_id                  = aws_vpc.itea-vpc.id
-  cidr_block              = "172.31.0.0/20"
+  cidr_block              = "172.31.0.0/24"
   map_public_ip_on_launch = true
   availability_zone       = "eu-north-1a"
 
@@ -23,7 +23,7 @@ resource "aws_subnet" "itea-subnet-public-1" {
 
 resource "aws_subnet" "itea-subnet-public-2" {
   vpc_id                  = aws_vpc.itea-vpc.id
-  cidr_block              = "172.31.16.0/20"
+  cidr_block              = "172.31.16.0/24"
   map_public_ip_on_launch = true
   availability_zone       = "eu-north-1b"
 
@@ -34,7 +34,7 @@ resource "aws_subnet" "itea-subnet-public-2" {
 
 resource "aws_subnet" "itea-subnet-public-3" {
   vpc_id                  = aws_vpc.itea-vpc.id
-  cidr_block              = "172.31.32.0/20"
+  cidr_block              = "172.31.32.0/24"
   map_public_ip_on_launch = true
   availability_zone       = "eu-north-1c"
 
