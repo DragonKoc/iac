@@ -17,7 +17,7 @@ provider "kubernetes" {
 module "my-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "Itea-eks"
-  cluster_version = "1.19"
+  cluster_version = "1.18"
   subnets         = [aws_subnet.itea-subnet-public-1.id, aws_subnet.itea-subnet-public-2.id]
   vpc_id          = aws_vpc.itea-vpc.id
 
