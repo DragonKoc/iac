@@ -24,14 +24,14 @@ module "my-cluster" {
   worker_groups = [
     {
       name                          = "worker-group-1"
-      instance_type                 = "t2.small"
+      instance_type                 = "t2.micro"
       asg_desired_capacity          = 2
       root_volume_type = "gp2"
       additional_security_group_ids = [aws_security_group.itea-all.id]
     },
     {
       name                          = "worker-group-2"
-      instance_type                 = "t2.medium"
+      instance_type                 = "t2.micro"
       root_volume_type = "gp2"
       additional_security_group_ids = [aws_security_group.itea-all.id]
       asg_desired_capacity          = 1
