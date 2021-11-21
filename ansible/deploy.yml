@@ -1,7 +1,0 @@
-- name: All
-  gather_facts: false
-  hosts: [all]
-  become: yes
-  roles:
- #   - preconfig
-    - deploy
