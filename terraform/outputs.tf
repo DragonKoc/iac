@@ -8,5 +8,5 @@ output "kubeconfig-certificate-authority-data" {
 
 output "ec2_endpoint" {
   description = "The address of the EC2 instance"
-  value       = aws_instance.linux-instance.public_ip
+  value       = aws_instance.ubuntu-itea.public_ip
 }
