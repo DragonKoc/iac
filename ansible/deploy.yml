@@ -52,15 +52,13 @@
 
     - name: Install list of packages
       apt:
-        name: "{{ item }}"
+        name: ca-certificates
         state: installed
-        update_cache: yes
-      with_items:
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - software-properties-common
-        - docker-ce
+
+    - name: Install list of packages
+      apt:
+        name: docker-ce
+        state: installed   
 
     - name: Check Docker Install
       service:
