@@ -3,7 +3,7 @@ terraform {
     organization = "itea-test"
 
     workspaces {
-      name = "itea"
+      name = "itea-test"
     }
   }
 }
