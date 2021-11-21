@@ -14,3 +14,71 @@
         name: python3
         state: latest   
 
+    - name: Add universe
+      apt_repository:
+        repo: "deb http://us.archive.ubuntu.com/ubuntu/ bionic universe"
+        state: present
+    
+    - name: Add additional package 
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates      
+          - curl
+          - gnupg
+          - lsb-release
+        update-cache: yes
+        cache_valid_time: 86400
+
+    - name: Add key of Docker
+      apt_key:
+        url:  https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Install stable repository
+      apt_repository:
+        repo: >
+          deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg]
+          https://download.docker.com/linux/ubuntu
+          focal stable
+        state: present  
+        update_cache: yes
+        filename: docker
+    
+    - name: Install Docker-ce
+      apt:
+        name: docker-ce 
+        update-cache: yes
+
+    - name: Check Docker Install
+      service:
+        name: docker
+        state: restarted
+        enabled: yes
+
+  - name: Get last version Docker-Compose
+      uri:
+        url: https://api.github.com/repos/docker/compose/releases/latest 
+        body_format: json
+      register: page
+
+    - name: Install Docker-Compose
+      get_url: 
+        url: "https://github.com/docker/compose/releases/download/{{ page.json.tag_name }}/docker-compose-Linux-x86_64"
+        dest: /usr/local/bin/docker-compose 
+        mode: 0755
+
+  - name: PIP Docker
+      pip:
+        name: docker
+
+    - name: PIP Docker-Compose
+      pip:
+        name: docker-compose        
+
+    - name: Add user ec2-user to docker group
+      user:
+        name: ec2-ser
+        groups: docker
+        append: yes
+      become: yes        
