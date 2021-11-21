@@ -6,7 +6,7 @@ resource "aws_instance" "ubuntu-itea" {
 
   vpc_security_group_ids = [aws_security_group.itea-all.id]
 
-  key_name = "mac-koc"
+  key_name = "mac-central"
 
   tags = {
     "Name" = "ubuntu-itea"
