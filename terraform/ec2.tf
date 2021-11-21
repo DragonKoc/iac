@@ -1,6 +1,6 @@
 resource "aws_instance" "ubuntu-itea" {
-  ami           = "ami-0bd9c26722573e69b"
-  instance_type = "t3.micro"
+  ami           = "ami-009b16df9fcaac611"
+  instance_type = "t2.micro"
 
   subnet_id = aws_subnet.itea-subnet-public-3.id
 

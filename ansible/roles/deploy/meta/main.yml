@@ -1,0 +1,12 @@
+galaxy_info:
+  role_name: deploy
+  description: Deploy for Docker-Compose
+  author: Koc
+  licence: MIT
+  min_ansible_version: 2.9
+  platforms: 
+    - name: Ubuntu
+      versions:
+        - all
+dependencies:
+  - role: preconfig
