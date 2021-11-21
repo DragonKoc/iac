@@ -35,25 +35,45 @@
         url:  https://download.docker.com/linux/ubuntu/gpg
         state: present
 
-    - name: Install stable repository
-      apt_repository:
-        repo: >
-          deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg]
-          https://download.docker.com/linux/ubuntu
-          focal stable
-        state: present  
+    - name: Update all packages
+      yum:
+        name: '*'
+        state: latest
+        update_only: yes
+
+    - name: Ensure a list of yum packages are installed
+      yum:
+        name: "{{ packages }}"
+        state: latest
         update_cache: yes
-        filename: docker
+      vars:
+        packages:
+        - python-pip
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+        - amazon-linux-extras
 
-    - name: Add Docker GPG key
-      apt_key: url=https://download.docker.com/linux/ubuntu/gpg
+    - name: Add extras repository
+      shell: yum-config-manager --enable extras
 
-    - name: Add Docker APT repository
-      apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/linux/{{ansible_distribution|lower}} {{ansible_distribution_release}} stable
+    - name: Install docker-ce (centos) via amazon-linux-extras packages
+      shell: "amazon-linux-extras install docker=18.06.1 -y"
 
-    - name: Install Docker-compose 
-      shell: curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    - name: Enable Docker CE service at startup
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Ensure Python pip packages are installed
+      pip:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - boto
+        - boto3
+        - docker-compose
 
     - name: Update all packages to their latest version
       apt:
