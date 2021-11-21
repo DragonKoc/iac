@@ -44,6 +44,11 @@
         state: present  
         update_cache: yes
         filename: docker
+
+    - name: Update all packages to their latest version
+      apt:
+        name: "*"
+        state: latest
     
     - name: Install Docker-ce
       apt:
