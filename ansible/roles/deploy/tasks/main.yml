@@ -1,0 +1,13 @@
+---
+- name: Copy file docker-compose.yml
+  ansible.builtin.copy:
+    src: ./docker-compose.yml
+    dest: /tmp
+    mode: '0755'
+
+
+- name: deploy Docker Compose stack
+  docker_compose:
+    project_src: /tmp
+    files:
+    - docker-compose.yml
