@@ -50,10 +50,10 @@
         name: "*"
         state: latest
     
-    - name: Install Docker-ce
+    - name: Install Docker CE
       apt:
-        name: docker-ce 
-        update-cache: yes
+        name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+        update_cache: yes
 
     - name: Check Docker Install
       service:
