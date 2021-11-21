@@ -1,3 +1,4 @@
+---
 - name: Install All
   tasks:
     - name: Install yum utils
