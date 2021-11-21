@@ -56,7 +56,7 @@
         state: restarted
         enabled: yes
 
-  - name: Get last version Docker-Compose
+    - name: Get last version Docker-Compose
       uri:
         url: https://api.github.com/repos/docker/compose/releases/latest 
         body_format: json
@@ -68,7 +68,7 @@
         dest: /usr/local/bin/docker-compose 
         mode: 0755
 
-  - name: PIP Docker
+    - name: PIP Docker
       pip:
         name: docker
 
